@@ -42,6 +42,6 @@
 
 ## How to specific backup
 
-    - pg_dump -h localhost -U postgres -d arcee --schema-only > arcee_schema_backup.sql
+    - pg_dump -h localhost -U postgres -d arcee --schema-only > src\backup\arcee_backup.sql
 
 # Fin

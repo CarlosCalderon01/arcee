@@ -35,6 +35,14 @@ CREATE TABLE cities (
 -- Índice para mejorar el rendimiento de las consultas basadas en state_id
 CREATE INDEX idx_cities_state_id ON cities(state_id);
 
+-- Table languages
+CREATE TABLE languages (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(32) UNIQUE NOT NULL,
+    iso639_1 VARCHAR(2) UNIQUE NOT NULL,
+    iso639_2 VARCHAR(3) UNIQUE NOT NULL
+);
+
 -- Table genders
 CREATE TABLE genders (
     id SERIAL PRIMARY KEY,  -- Cambiado a SERIAL para permitir la expansión y escalabilidad
@@ -52,14 +60,6 @@ CREATE TABLE genders_by_languages (
 -- Opcionalmente, puedes agregar índices para mejorar el rendimiento de consultas
 CREATE INDEX idx_genders_by_languages_language_id ON genders_by_languages(language_id);
 CREATE INDEX idx_genders_by_languages_genders_id ON genders_by_languages(genders_id);
-
--- Table languages
-CREATE TABLE languages (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(32) UNIQUE NOT NULL,
-    iso639_1 VARCHAR(2) UNIQUE NOT NULL,
-    iso639_2 VARCHAR(3) UNIQUE NOT NULL
-);
 
 -- Table holidays_by_countries
 CREATE TABLE holidays_by_countries (
@@ -122,12 +122,13 @@ CREATE TABLE users (
     home_address VARCHAR(64),
     postal_code VARCHAR(8),
     cell_phone VARCHAR(16),
-    home_phone VARCHAR(16),
-    -- Índices para mejorar el rendimiento de consultas por localización
-    INDEX idx_users_country_id (country_id),
-    INDEX idx_users_state_id (state_id),
-    INDEX idx_users_city_id (city_id)
+    home_phone VARCHAR(16)
 );
+
+-- Índices para mejorar el rendimiento de consultas por localización
+CREATE INDEX idx_users_country_id ON users(country_id);
+CREATE INDEX idx_users_state_id ON users(state_id);
+CREATE INDEX idx_users_city_id ON users(city_id);
 
 -- Table businesses
 CREATE TABLE businesses (
@@ -144,12 +145,14 @@ CREATE TABLE businesses (
     cell_phone VARCHAR(20),
     home_phone VARCHAR(20),
     updated_at TIMESTAMP,  -- Cambiado a TIMESTAMP para mayor precisión
-    created_at TIMESTAMP,  -- Cambiado a TIMESTAMP para mayor precisión
-    -- Índices para mejorar el rendimiento de consultas por localización
-    INDEX idx_businesses_country_id (country_id),
-    INDEX idx_businesses_state_id (state_id),
-    INDEX idx_businesses_city_id (city_id)
+    created_at TIMESTAMP   -- Cambiado a TIMESTAMP para mayor precisión
 );
+
+-- Índices para mejorar el rendimiento de consultas por localización
+CREATE INDEX idx_businesses_country_id ON businesses(country_id);
+CREATE INDEX idx_businesses_state_id ON businesses(state_id);
+CREATE INDEX idx_businesses_city_id ON businesses(city_id);
+
 
 -- Table admins
 CREATE TABLE admins (
