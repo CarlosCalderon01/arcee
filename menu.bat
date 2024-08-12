@@ -8,8 +8,7 @@ echo ===============================
 echo.
 echo 1. Ejecutar Script (connection) 1
 echo 2. Ejecutar Script (backup of arcee) 2
-echo 3. Ejecutar Script (do nothing) 3
-echo 4. Salir
+echo 3. Ejecutar Script (restore db) 3
 echo.
 set /p opcion=Selecciona una opción (1-4): 
 
@@ -36,8 +35,7 @@ goto inicio
 
 :ejecutar3
 echo Ejecutando Script 3...
-REM Aquí puedes colocar el comando para ejecutar tu script 3
-REM Por ejemplo: call script3.bat
+call src\custom\res_backup.bat
 pause
 goto inicio
 
