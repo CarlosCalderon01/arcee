@@ -1,0 +1,53 @@
+/ NOTAS:
+
+PARTE 1: // ----- // ----- // ----- // ----- // ----- // ----- // ----- // ----- //
+
+    type:
+        tipo de índice (btree, gin, gist, hash dependiendo de la base de datos). Por ahora, solo se aceptan los tipos btree y hash.
+
+    name:
+        nombre del índice.
+
+    unique:
+        índice único.
+
+    pk:
+        clave primaria.
+
+PARTE 2: // ----- // ----- // ----- // ----- // ----- // ----- // ----- // ----- //
+
+    <: uno a muchos.
+        Ejemplo: users.id < posts.user_id
+
+    >: muchos a uno.
+        Ejemplo: posts.user_id > users.id
+
+    -: uno a uno. Ejemplo:
+        users.id - user_infos.user_id
+        
+    <>: muchos a muchos.
+        Ejemplo: authors.id <> books.id
+
+PARTE 3: // ----- // ----- // ----- // ----- // ----- // ----- // ----- // ----- //
+
+    + Lista de configuraciones de columna que puedes usar:
+
+    note:
+        'string to add notes': añade una nota de metadatos a esta columna.
+
+    primary key o pk:
+        marca una columna como clave primaria. Para claves primarias compuestas, consulta la sección 'Índices'.
+
+    null o not null:
+        marca una columna como permitiendo valores nulos o no.
+
+    unique:
+        marca la columna como única.
+    default:
+        some_value: establece un valor predeterminado para la columna, consulta la sección 'Valor Predeterminado' a continuación.
+
+    increment:
+        marca la columna como autoincrementable.
+
+    Nota:
+        Puedes usar un método alternativo para configuraciones no soportadas añadiendo el nombre de la configuración al nombre del tipo de columna, como en id "bigint unsigned" [pk].
